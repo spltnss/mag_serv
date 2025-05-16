@@ -2,7 +2,7 @@ FROM python:3.9-slim
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y iputils-ping
+RUN apt-get update --allow-unauthenticated && apt-get install -y iputils-ping --allow-unauthenticated
 
 COPY . .
 
