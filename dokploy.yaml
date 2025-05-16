@@ -1,0 +1,6 @@
+services:
+  magserv:
+    image: magserv-test:latest
+    ports:
+      - "192.168.0.104:80:80"   # здесь IP твоего компа
+    restart: always
