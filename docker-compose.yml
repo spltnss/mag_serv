@@ -7,5 +7,5 @@ services:
       dockerfile: Dockerfile
     container_name: mag_serv
     ports:
-      - "443:80"
+      - "8000:8000"
     restart: always
