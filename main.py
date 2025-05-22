@@ -572,7 +572,7 @@ div[style*="overflow-y: auto"] {
         <div class="container header-content">
             <div class="logo">
                 <i class="fas fa-store-alt"></i>
-                <span>Мониторинг магазинов</span>
+                <span class="pulse">Мониторинг магазинов</span>
             </div>
             <div class="header-actions">
                 <div class="stats">
@@ -627,9 +627,6 @@ div[style*="overflow-y: auto"] {
             <div class="main-content">
                 <div class="table-header">
                     <h2><i class="fas fa-list"></i> Список магазинов</h2>
-                    <div class="search-box">
-                        <i class="fas fa-search"></i>
-                    </div>
                 </div>
 
                <table style="width: 100%; table-layout: fixed; border-collapse: collapse;">
