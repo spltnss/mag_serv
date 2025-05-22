@@ -622,10 +622,6 @@ div[style*="overflow-y: auto"] {
                     <label for="search-store">Поиск магазина</label>
                     <input type="text" id="search-store" placeholder="Номер магазина...">
                 </div>
-
-                <button id="refresh-btn" class="pulse" style="width:100%; padding:10px; background:var(--primary); color:white; border:none; border-radius:6px; cursor:pointer;">
-                    <i class="fas fa-sync-alt"></i> Обновить
-                </button>
             </div>
 
             <div class="main-content">
