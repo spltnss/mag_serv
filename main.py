@@ -629,7 +629,6 @@ div[style*="overflow-y: auto"] {
                     <h2><i class="fas fa-list"></i> Список магазинов</h2>
                     <div class="search-box">
                         <i class="fas fa-search"></i>
-                        <input type="text" id="global-search" placeholder="Поиск...">
                     </div>
                 </div>
 
