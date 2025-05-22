@@ -575,7 +575,7 @@ div[style*="overflow-y: auto"] {
                 <span>Мониторинг магазинов</span>
             </div>
             <div class="header-actions">
-                <div class="stats pulse">
+                <div class="stats">
                     <div class="stat-card">
                         <i class="fas fa-wifi"></i>
                         <span id="total-stores">{{ stores|length }} магазинов</span>
