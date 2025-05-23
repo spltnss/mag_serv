@@ -1,11 +1,10 @@
-from flask import Flask, render_template_string, jsonify, request
+from flask import Flask, render_template_string, jsonify
 from apscheduler.schedulers.background import BackgroundScheduler
 import subprocess
 import platform
 import logging
 from concurrent.futures import ThreadPoolExecutor
 import os
-import time
 from datetime import datetime
 import json
 
@@ -17,9 +16,15 @@ logging.basicConfig(level=logging.INFO)
 # Путь к файлу с IP магазинов
 SHOP_LIST_PATH = r"shop_list.json"
 
+# Добавляем путь к файлу с информацией о сменах
+SHIFT_STATUS_PATH = r"shops_smen.json"
+
 # Загрузка IP магазинов из файла
 stores = {}
 last_modified_time = 0
+
+# Добавляем глобальную переменную для хранения статусов смен
+shift_statuses = {}
 
 
 def load_store_ips():
@@ -101,6 +106,37 @@ def check_store(store, data):
         stores[store]['router'] = 'Требуется проверка'
 
 
+def load_shift_statuses():
+    global shift_statuses
+    try:
+        if not os.path.exists(SHIFT_STATUS_PATH):
+            logging.error("JSON файл статусов смен не найден!")
+            return
+
+        with open(SHIFT_STATUS_PATH, 'r', encoding='utf-8') as file:
+            shift_data = json.load(file)
+            shift_statuses = {shop["name"]: shop for shop in shift_data}
+
+            # Специальная обработка для shop1 и shop1z
+            if 'shop1' in shift_statuses and 'shop1z' not in shift_statuses:
+                shift_statuses['shop1z'] = {
+                    'name': 'shop1z',
+                    'is_shift_open': shift_statuses['shop1']['is_shift_open'],
+                    'cashiers': [],
+                    'last_checked': shift_statuses['shop1']['last_checked']
+                }
+            elif 'shop1z' in shift_statuses and 'shop1' not in shift_statuses:
+                shift_statuses['shop1'] = {
+                    'name': 'shop1',
+                    'is_shift_open': shift_statuses['shop1z']['is_shift_open'],
+                    'cashiers': [],
+                    'last_checked': shift_statuses['shop1z']['last_checked']
+                }
+
+        logging.info("Статусы смен обновлены из JSON.")
+    except Exception as e:
+        logging.error(f"Ошибка при загрузке JSON файла статусов смен: {e}")
+
 def ping_stores():
     with ThreadPoolExecutor(max_workers=20) as executor:
         executor.map(lambda s: check_store(s, stores[s]), stores.keys())
@@ -110,10 +146,12 @@ def ping_stores():
 scheduler = BackgroundScheduler()
 scheduler.add_job(ping_stores, 'interval', seconds=10)
 scheduler.add_job(load_store_ips, 'interval', minutes=30)
+scheduler.add_job(load_shift_statuses, 'interval', minutes=5)
 scheduler.start()
 
-# Загрузка IP перед стартом
+# Загрузка данных перед стартом
 load_store_ips()
+load_shift_statuses()  # Добавляем загрузку статусов смен
 
 # Modern UI Template with Dark Mode
 html_template = '''
@@ -565,6 +603,65 @@ div[style*="overflow-y: auto"] {
     animation: pulse-red 1.5s infinite;
 }
 }
+
+.shift-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.shift-status i {
+    font-size: 1.1rem;
+}
+
+.fa-door-open {
+    color: var(--success);
+}
+
+.fa-door-closed {
+    color: var(--danger);
+}
+
+.reset-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    margin-top: 10px;
+}
+
+.reset-btn:hover {
+    background-color: var(--primary-light);
+}
+
+.reset-btn i {
+    font-size: 0.9rem;
+    transition: transform 0.3s ease;
+}
+
+.reset-btn.active {
+    background-color: var(--danger);
+    animation: pulse-red 0.75s; /* Уменьшенное время */
+}
+
+.reset-btn.active i {
+    animation: spin 0.5s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
     </style>
 </head>
 <body>
@@ -599,30 +696,42 @@ div[style*="overflow-y: auto"] {
     <div class="container">
         <div class="dashboard">
             <div class="sidebar">
-                <div class="filter-group">
-                    <h3><i class="fas fa-filter"></i> Фильтры</h3>
-                    <label for="status-filter">Статус</label>
-                    <select id="status-filter">
-                        <option value="all">Все</option>
-                        <option value="online">Online</option>
-                        <option value="offline">Offline</option>
-                    </select>
-                </div>
+    <div class="filter-group">
+        <h3><i class="fas fa-filter"></i> Фильтры</h3>
+        <label for="status-filter">Статус</label>
+        <select id="status-filter">
+            <option value="all">Все</option>
+            <option value="online">Online</option>
+            <option value="offline">Offline</option>
+        </select>
+    </div>
 
-                <div class="filter-group">
-                    <label for="vpn-filter">Тип VPN</label>
-                    <select id="vpn-filter">
-                        <option value="all">Все</option>
-                        <option value="new">Новая VPN</option>
-                        <option value="old">Старая VPN</option>
-                    </select>
-                </div>
+    <div class="filter-group">
+        <label for="vpn-filter">Тип VPN</label>
+        <select id="vpn-filter">
+            <option value="all">Все</option>
+            <option value="new">Новая VPN</option>
+            <option value="old">Старая VPN</option>
+        </select>
+    </div>
 
-                <div class="filter-group">
-                    <label for="search-store">Поиск магазина</label>
-                    <input type="text" id="search-store" placeholder="Номер магазина...">
-                </div>
-            </div>
+    <div class="filter-group">
+        <label for="shift-filter">Смена</label>
+        <select id="shift-filter">
+            <option value="all">Все</option>
+            <option value="open">Открыта</option>
+            <option value="closed">Закрыта</option>
+        </select>
+    </div>
+
+    <div class="filter-group">
+        <label for="search-store">Поиск магазина</label>
+        <input type="text" id="search-store" placeholder="Номер магазина...">
+    </div>
+    <button id="reset-filters" class="reset-btn">
+    <i class="fas fa-sync-alt"></i> Сбросить фильтры
+</button>
+</div>
 
             <div class="main-content">
                 <div class="table-header">
@@ -635,6 +744,7 @@ div[style*="overflow-y: auto"] {
             <th>Магазин</th>
             <th>Статус</th>
             <th>Роутер</th>
+            <th>Смена</th>  <!-- Новый столбец -->
             <th>Обновлено</th>
         </tr>
     </thead>
@@ -644,37 +754,53 @@ div[style*="overflow-y: auto"] {
 <div style="max-height: 600px; overflow-y: auto;">
     <table style="width: 100%; table-layout: fixed; border-collapse: collapse;">
         <tbody id="stores-table">
-            {% for store, data in stores.items() %}
-            <tr id="{{ store }}" class="{{ data.status|lower }}" data-vpn="{{ data.vpn }}">
-                <td>
-                    <strong>{{ store[4:] }}</strong><br>
-                    <small>{{ data.ip }}</small>
-                </td>
-                <td>
-                    <span class="status">
-                        {% if data.status == 'Online' %}
-                            <i class="fas fa-circle"></i> Online
-                        {% else %}
-                            <i class="fas fa-circle"></i> Offline
-                        {% endif %}
-                    </span>
-                </td>
-                <td>
-                    <div class="router-status">
-                        {% if data.router == 'Работает' %}
-                            <i class="fas fa-check-circle"></i>
-                        {% elif data.router == 'Касса offline' %}
-                            <i class="fas fa-exclamation-circle"></i>
-                        {% else %}
-                            <i class="fas fa-times-circle"></i>
-                        {% endif %}
-                        {{ data.router }}
-                    </div>
-                </td>
-                <td class="last-updated">{{ data.last_updated }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
+    {% for store, data in stores.items() %}
+    <tr id="{{ store }}" class="{{ data.status|lower }}" data-vpn="{{ data.vpn }}">
+        <td>
+            <strong>{{ store[4:] }}</strong><br>
+            <small>{{ data.ip }}</small>
+        </td>
+        <td>
+            <span class="status">
+                {% if data.status == 'Online' %}
+                    <i class="fas fa-circle"></i> Online
+                {% else %}
+                    <i class="fas fa-circle"></i> Offline
+                {% endif %}
+            </span>
+        </td>
+        <td>
+            <div class="router-status">
+                {% if data.router == 'Работает' %}
+                    <i class="fas fa-check-circle"></i>
+                {% elif data.router == 'Касса offline' %}
+                    <i class="fas fa-exclamation-circle"></i>
+                {% else %}
+                    <i class="fas fa-times-circle"></i>
+                {% endif %}
+                {{ data.router }}
+            </div>
+        </td>
+        <td>
+    <div class="shift-status">
+        {% if shift_statuses.get(store, {}).get('is_shift_open', False) %}
+            <i class="fas fa-door-open" style="color: #4cc9f0;"></i>
+            {% if store in ['shop1', 'shop1z'] %}
+                Смена открыта
+            {% else %}
+                {% for cashier in shift_statuses[store]['cashiers'] %}
+                    {{ cashier['user_name'] }}<br>
+                {% endfor %}
+            {% endif %}
+        {% else %}
+            <i class="fas fa-door-closed" style="color: #f94144;"></i> Закрыта
+        {% endif %}
+    </div>
+</td>
+        <td class="last-updated">{{ data.last_updated }}</td>
+    </tr>
+    {% endfor %}
+</tbody>
     </table>
 </div>
 
@@ -688,46 +814,65 @@ div[style*="overflow-y: auto"] {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
         function fetchStatus() {
-            $.get('/status', function(data) {
-                // Обновляем статистику
-                const total = Object.keys(data).length;
-                const online = Object.values(data).filter(x => x.status === 'Online').length;
+    $.get('/status', function(data) {
+        // Обновляем статистику
+        const total = Object.keys(data).length;
+        const online = Object.values(data).filter(x => x.status === 'Online').length;
 
-                $('#total-stores').text(total + ' магазинов');
-                $('#online-stores').text(online + ' онлайн');
-                $('#offline-stores').text((total - online) + ' оффлайн');
+        $('#total-stores').text(total + ' магазинов');
+        $('#online-stores').text(online + ' онлайн');
+        $('#offline-stores').text((total - online) + ' оффлайн');
 
-                // Обновляем таблицу
-                for (const [store, info] of Object.entries(data)) {
-                    const row = $('#' + store);
-                    if (row.length) {
-                        // Обновляем класс строки
-                        row.removeClass('online offline unknown').addClass(info.status.toLowerCase());
+        // Обновляем таблицу
+        for (const [store, info] of Object.entries(data)) {
+            const row = $('#' + store);
+            if (row.length) {
+                // Обновляем класс строки
+                row.removeClass('online offline unknown').addClass(info.status.toLowerCase());
 
-                        // Обновляем статус
-                        const statusCell = row.find('td:nth-child(2) .status');
-                        statusCell.html(info.status === 'Online' 
-                            ? '<i class="fas fa-circle"></i> Online' 
-                            : '<i class="fas fa-circle"></i> Offline');
+                // Обновляем статус
+                const statusCell = row.find('td:nth-child(2) .status');
+                statusCell.html(info.status === 'Online' 
+                    ? '<i class="fas fa-circle"></i> Online' 
+                    : '<i class="fas fa-circle"></i> Offline');
 
-                        // Обновляем статус роутера
-                        const routerCell = row.find('td:nth-child(3) .router-status');
-                        let icon = '';
-                        if (info.router === 'Работает') {
-                            icon = '<i class="fas fa-check-circle"></i>';
-                        } else if (info.router === 'Касса offline') {
-                            icon = '<i class="fas fa-exclamation-circle"></i>';
-                        } else {
-                            icon = '<i class="fas fa-times-circle"></i>';
-                        }
-                        routerCell.html(icon + info.router);
-
-                        // Обновляем время
-                        row.find('td:nth-child(4)').text(info.last_updated);
-                    }
+                // Обновляем статус роутера
+                const routerCell = row.find('td:nth-child(3) .router-status');
+                let icon = '';
+                if (info.router === 'Работает') {
+                    icon = '<i class="fas fa-check-circle"></i>';
+                } else if (info.router === 'Касса offline') {
+                    icon = '<i class="fas fa-exclamation-circle"></i>';
+                } else {
+                    icon = '<i class="fas fa-times-circle"></i>';
                 }
-            });
+                routerCell.html(icon + info.router);
+
+                // ОБНОВЛЕННЫЙ БЛОК: Статус смены
+                const shiftCell = row.find('td:nth-child(4) .shift-status');
+                if (info.shift && info.shift.is_shift_open) {
+                    if (store === 'shop1' || store === 'shop1z') {
+                        // Специальный текст для shop1 и shop1z
+                        shiftCell.html('<i class="fas fa-door-open" style="color: #4cc9f0;"></i> Смена открыта');
+                    } else {
+                        // Стандартное отображение для остальных магазинов
+                        let cashiers = '';
+                        if (info.shift.cashiers && info.shift.cashiers.length > 0) {
+                            cashiers = info.shift.cashiers.map(c => c.user_name).join('<br>');
+                        }
+                        shiftCell.html('<i class="fas fa-door-open" style="color: #4cc9f0;"></i> ' + cashiers);
+                    }
+                } else {
+                    // Закрытая смена для всех магазинов
+                    shiftCell.html('<i class="fas fa-door-closed" style="color: #f94144;"></i> Закрыта');
+                }
+
+                // Обновляем время
+                row.find('td:nth-child(5)').text(info.last_updated);
+            }
         }
+    });
+}
 
         // Автоматическое обновление каждые 10 секунд
         setInterval(fetchStatus, 10000);
@@ -761,29 +906,81 @@ div[style*="overflow-y: auto"] {
 });
 
         // Поиск и фильтрация
-        $('#global-search, #search-store').keyup(function() {
-            const search = $(this).val().toLowerCase();
-            $('#stores-table tr').each(function() {
-                const storeNum = $(this).attr('id').substring(4);
-                $(this).toggle(storeNum.includes(search));
-            });
-        });
+        $('#status-filter, #vpn-filter, #shift-filter').change(function() {
+    applyFilters();
+});
 
-        $('#status-filter, #vpn-filter').change(function() {
-            const status = $('#status-filter').val();
-            const vpn = $('#vpn-filter').val();
+function applyFilters() {
+    const status = $('#status-filter').val();
+    const vpn = $('#vpn-filter').val();
+    const shift = $('#shift-filter').val();
+    const search = $('#search-store').val().toLowerCase();
 
-            $('#stores-table tr').each(function() {
-                const row = $(this);
-                const rowStatus = row.hasClass('online') ? 'online' : 'offline';
-                const rowVpn = row.data('vpn') === 'Новая VPN' ? 'new' : 'old';
+    $('#stores-table tr').each(function() {
+        const row = $(this);
+        const rowStatus = row.hasClass('online') ? 'online' : 'offline';
+        const rowVpn = row.data('vpn') === 'Новая VPN' ? 'new' : 'old';
+        
+        // Проверяем статус смены
+        const shiftText = row.find('td:nth-child(4) .shift-status').text().toLowerCase();
+        const rowShift = shiftText.includes('закрыта') ? 'closed' : 'open';
 
-                const statusMatch = status === 'all' || rowStatus === status;
-                const vpnMatch = vpn === 'all' || rowVpn === vpn;
+        const statusMatch = status === 'all' || rowStatus === status;
+        const vpnMatch = vpn === 'all' || rowVpn === vpn;
+        const shiftMatch = shift === 'all' || rowShift === shift;
+        const searchMatch = search === '' || row.attr('id').substring(4).includes(search);
 
-                row.toggle(statusMatch && vpnMatch);
-            });
-        });
+        // Плавное появление/исчезновение строк
+        if (statusMatch && vpnMatch && shiftMatch && searchMatch) {
+            row.stop(true, true).fadeIn(200);
+        } else {
+            row.stop(true, true).fadeOut(200);
+        }
+    });
+}
+
+// Сброс фильтров
+$('#reset-filters').click(function() {
+    const btn = $(this);
+    const icon = btn.find('i');
+    
+    // Убираем стандартную пульсацию
+    btn.removeClass('pulse');
+    
+    // Добавляем активное состояние с pulse-red
+    btn.addClass('active pulse-red');
+    
+    // Сбрасываем значения фильтров
+    $('#status-filter').val('all');
+    $('#vpn-filter').val('all');
+    $('#shift-filter').val('all');
+    $('#search-store').val('');
+    
+    // Применяем фильтры
+    applyFilters();
+    
+    // Возвращаем стандартный стиль через 0.75 секунды
+    setTimeout(() => {
+        btn.removeClass('active pulse-red');
+        
+        // Возвращаем стандартную пульсацию после небольшой задержки
+        setTimeout(() => {
+            btn.addClass('pulse');
+        }, 200);
+        
+    }, 750); // Уменьшенное время в 2 раза
+});
+
+// Инициализация - добавляем pulse эффект при загрузке
+$(document).ready(function() {
+    $('#reset-filters').addClass('pulse');
+    fetchStatus();
+});
+
+// Обновляем обработчик поиска
+$('#search-store').keyup(function() {
+    applyFilters();
+});
 
         // Инициализация
         $(document).ready(function() {
@@ -801,19 +998,38 @@ def index():
     offline_count = len(stores) - online_count
 
     return render_template_string(html_template,
-                                  stores=stores,
-                                  online_count=online_count,
-                                  offline_count=offline_count)
+                                stores=stores,
+                                online_count=online_count,
+                                offline_count=offline_count,
+                                shift_statuses=shift_statuses)  # Добавляем передачу статусов смен
 
 
 @app.route('/status')
 def status():
-    return jsonify({
-        store: {
-            **data,
-            'vpn': data['vpn']
-        } for store, data in stores.items()
-    })
+    result = {}
+    for store, data in stores.items():
+        shift_data = shift_statuses.get(store, {'is_shift_open': False})
+
+        # Специальная обработка для shop1 и shop1z
+        if store in ['shop1', 'shop1z']:
+            result[store] = {
+                **data,
+                'vpn': data['vpn'],
+                'shift': {
+                    'is_shift_open': shift_data['is_shift_open'],
+                    'display_text': 'Смена открыта' if shift_data['is_shift_open'] else 'Закрыта'
+                }
+            }
+        else:
+            result[store] = {
+                **data,
+                'vpn': data['vpn'],
+                'shift': {
+                    'is_shift_open': shift_data['is_shift_open'],
+                    'cashiers': shift_data.get('cashiers', [])
+                }
+            }
+    return jsonify(result)
 
 
 if __name__ == '__main__':
