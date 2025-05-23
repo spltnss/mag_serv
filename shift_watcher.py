@@ -1,234 +1,183 @@
 import psycopg2
-from psycopg2 import sql
 import json
 from datetime import datetime
-import os
+import sys
 import time
-import threading
 
-# Конфигурация подключения к БД
 DB_CONFIG = {
-    'host': '192.168.0.200',
-    'port': 5438,
-    'user': 'postgres',
-    'password': 'user',
-    'main_db': 'main',
-    'docs_db': 'docs'
+    "host": "192.168.0.200",
+    "port": 5438,
+    "user": "postgres",
+    "password": "user",
+    "main_db": "main",
+    "docs_db": "docs",
 }
 
-# Пути к файлам
-USERS_FILE = 'users.json'
-SHOPS_SMEN_FILE = 'shops_smen.json'
-
-# Интервал обновления в секундах (5 минут)
-UPDATE_INTERVAL = 300
+EXCLUDED_SHOPS = {"1", "97"}
+STATIC_POSCODES = {"1": "700123", "1z": "2001", "97": "2097"}
 
 
-def connect_to_db(database):
-    """Установка соединения с PostgreSQL"""
+def connect_to_db(dbname):
     try:
-        conn = psycopg2.connect(
-            host=DB_CONFIG['host'],
-            port=DB_CONFIG['port'],
-            user=DB_CONFIG['user'],
-            password=DB_CONFIG['password'],
-            database=database
+        return psycopg2.connect(
+            host=DB_CONFIG["host"],
+            port=DB_CONFIG["port"],
+            user=DB_CONFIG["user"],
+            password=DB_CONFIG["password"],
+            database=dbname,
         )
-        return conn
     except Exception as e:
-        print(f"Ошибка подключения к базе {database}: {e}")
+        print(f"Ошибка подключения к базе {dbname}: {e}", file=sys.stderr)
         return None
 
 
-def fetch_users_data():
-    """Получение данных о кассирах из таблицы user_entity"""
-    conn = connect_to_db(DB_CONFIG['main_db'])
+def strip_leading_zeros(s):
+    return str(int(s)) if s.isdigit() else s
+
+
+def fetch_poscards():
+    conn = connect_to_db(DB_CONFIG["main_db"])
+    poscards = {}
     if not conn:
-        return None
+        return poscards
 
     try:
-        with conn.cursor() as cursor:
-            cursor.execute("SELECT data FROM user_entity")
-            users = cursor.fetchall()
-            return [user[0] for user in users] if users else []
-    except Exception as e:
-        print(f"Ошибка при получении данных пользователей: {e}")
-        return []
+        with conn.cursor() as cur:
+            cur.execute("SELECT data FROM poscard_settings")
+            for (data,) in cur.fetchall():
+                shop_raw = str(data.get("Shop", "")).strip()
+                code = str(data.get("Code", "")).strip()
+                if not shop_raw or not code or shop_raw in EXCLUDED_SHOPS:
+                    continue
+                shop = strip_leading_zeros(shop_raw)
+                poscards[code] = {"shop": shop, "name": f"shop{shop}"}
+
+        for shop, code in STATIC_POSCODES.items():
+            poscards[code] = {"shop": shop, "name": f"shop{shop}"}
     finally:
         conn.close()
 
-
-def save_users_to_file(users_data):
-    """Сохранение данных о пользователях в файл users.json"""
-    try:
-        with open(USERS_FILE, 'w', encoding='utf-8') as f:
-            json.dump(users_data, f, ensure_ascii=False, indent=2)
-        print(f"Данные пользователей сохранены в {USERS_FILE}")
-    except Exception as e:
-        print(f"Ошибка при сохранении файла: {e}")
+    return poscards
 
 
-def load_users_from_file():
-    """Загрузка данных о пользователях из файла"""
-    if not os.path.exists(USERS_FILE):
-        return []
-
-    try:
-        with open(USERS_FILE, 'r', encoding='utf-8') as f:
-            return json.load(f)
-    except Exception as e:
-        print(f"Ошибка при загрузке файла пользователей: {e}")
-        return []
-
-
-def check_today_shifts():
-    """Проверка открытых смен на сегодня"""
-    conn = connect_to_db(DB_CONFIG['docs_db'])
+def fetch_users():
+    conn = connect_to_db(DB_CONFIG["main_db"])
+    users = []
     if not conn:
-        return None
-
-    today = datetime.now().strftime('%Y-%m-%d')
-    open_shifts = {}
+        return users
 
     try:
-        with conn.cursor() as cursor:
-            query = sql.SQL("""
-                SELECT data FROM openshiftdocument_entity 
-                WHERE data->>'Open' LIKE %s
-            """)
-            cursor.execute(query, [f'%{today}%'])
-            shifts = cursor.fetchall()
-
-            for shift in shifts:
-                shift_data = shift[0]
-                open_data = shift_data.get('Open', {})
-                user_code = open_data.get('UserCode')
-
-                if user_code:
-                    if user_code not in open_shifts:
-                        open_shifts[user_code] = []
-                    open_shifts[user_code].append(shift_data)
-
-    except Exception as e:
-        print(f"Ошибка при проверке смен: {e}")
+        with conn.cursor() as cur:
+            cur.execute("SELECT data FROM user_entity")
+            for (data,) in cur.fetchall():
+                shops = []
+                if "Shop" in data and data["Shop"]:
+                    shops = [str(data["Shop"])]
+                elif "Shops" in data and isinstance(data["Shops"], list):
+                    shops = [str(s) for s in data["Shops"] if s]
+                data["__shops__"] = [strip_leading_zeros(s) for s in shops]
+                users.append(data)
     finally:
         conn.close()
 
-    return open_shifts
+    return users
 
 
-def generate_shift_report(open_shifts, users_data):
-    """Генерация отчета по открытым сменам с учетом магазинов"""
+def fetch_today_transactions(tranztype):
+    conn = connect_to_db(DB_CONFIG["docs_db"])
+    tx = []
+    if not conn:
+        return tx
+
+    today = datetime.now().date()
+    try:
+        with conn.cursor() as cur:
+            cur.execute(
+                "SELECT unitcode, seller FROM doctransaction_entity "
+                "WHERE tranztype = %s AND tranzdate::date = %s",
+                (tranztype, today),
+            )
+            for unitcode, seller in cur.fetchall():
+                tx.append((str(unitcode).strip(), str(seller).strip()))
+    finally:
+        conn.close()
+
+    return tx
+
+
+def generate_shift_report(trans62, trans64, users, poscards):
     report = {}
+    users_by_code = {u["Code"]: u for u in users}
 
-    users_by_code = {user['Code']: user for user in users_data}
+    # Собиратель всех seller по unitcode
+    sellers_by_unit = {}
+    for unitcode, seller in trans62 + trans64:
+        sellers_by_unit.setdefault(unitcode, set()).add(seller)
 
-    for user_code, shifts in open_shifts.items():
-        user = users_by_code.get(user_code)
-        if not user:
-            continue
+    # Для каждого poscard
+    for code, info in poscards.items():
+        shop_name = info["name"]
+        sellers = sellers_by_unit.get(code, set())
 
-        user_shops = user.get('Shops', [])
-        user_name = user.get('Name', 'Неизвестно')
-
-        for shop_code in user_shops:
-            normalized_shop_code = str(int(shop_code)) if shop_code.isdigit() else shop_code
-
-            if normalized_shop_code not in report:
-                report[normalized_shop_code] = {
-                    'is_shift_open': False,
-                    'cashiers': []
-                }
-
-            report[normalized_shop_code]['is_shift_open'] = True
-            report[normalized_shop_code]['cashiers'].append({
-                'user_code': user_code,
-                'user_name': user_name
-            })
+        if sellers:
+            cashiers = []
+            for seller in sorted(sellers):
+                user = users_by_code.get(seller)
+                uname = user.get("Name", "Неизвестно") if user else "Неизвестно"
+                cashiers.append({"user_code": seller, "user_name": uname})
+            report[shop_name] = {"is_shift_open": True, "cashiers": cashiers}
+        else:
+            report[shop_name] = {"is_shift_open": False, "cashiers": []}
 
     return report
 
 
-def save_shifts_report(report):
-    """Сохранение отчета о сменах в файл в заданном формате"""
-    now = datetime.now().isoformat()
-    result = []
-
-    for shop_code, shop_data in report.items():
-        shop_entry = {
-            "name": f"shop{shop_code}",
-            "is_shift_open": shop_data['is_shift_open'],
-            "cashiers": shop_data['cashiers'],
-            "last_checked": now
-        }
-        result.append(shop_entry)
-
-    try:
-        with open(SHOPS_SMEN_FILE, 'w', encoding='utf-8') as f:
-            json.dump(result, f, ensure_ascii=False, indent=2)
-        print(f"\nОтчет о сменах сохранен в {SHOPS_SMEN_FILE}")
-    except Exception as e:
-        print(f"Ошибка при сохранении отчета: {e}")
+def save_shift_report(report, filename="shops_smen.json"):
+    now_iso = datetime.now().isoformat()
+    out = []
+    for shop_name, data in sorted(report.items()):
+        out.append(
+            {
+                "name": shop_name,
+                "is_shift_open": data["is_shift_open"],
+                "cashiers": data["cashiers"],
+                "last_checked": now_iso,
+            }
+        )
+    with open(filename, "w", encoding="utf-8") as f:
+        json.dump(out, f, ensure_ascii=False, indent=2)
 
 
 def print_report(report):
-    """Вывод отчета в консоль"""
-    print("\nОтчет по открытым сменам на сегодня:")
-    for shop_code, shop_data in sorted(report.items(), key=lambda x: int(x[0]) if x[0].isdigit() else x[0]):
-        status = "ОТКРЫТА" if shop_data['is_shift_open'] else "НЕ ОТКРЫТА"
-
-        if shop_data['is_shift_open']:
-            cashiers = ", ".join([f"{c['user_name']} (код: {c['user_code']})"
-                                  for c in shop_data['cashiers']])
-            print(f"Магазин {shop_code}: Смена {status} - {cashiers}")
+    print("Отчет по сменам:")
+    for shop_name, data in sorted(report.items()):
+        if data["is_shift_open"]:
+            for c in data["cashiers"]:
+                print(
+                    f"{shop_name}: Смена ОТКРЫТА — {c['user_name']} (код: {c['user_code']})"
+                )
         else:
-            print(f"Магазин {shop_code}: Смена {status}")
-
-
-def update_data():
-    """Основная функция обновления данных"""
-    print(f"\n[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] Обновление данных...")
-
-    # 1. Получаем данные о пользователях и сохраняем в файл
-    users_data = fetch_users_data()
-    if users_data:
-        save_users_to_file(users_data)
-    else:
-        print("Не удалось получить данные пользователей, загружаем из файла")
-        users_data = load_users_from_file()
-        if not users_data:
-            print("Нет данных о пользователях для работы")
-            return
-
-    # 2. Проверяем открытые смены на сегодня
-    open_shifts = check_today_shifts()
-
-    # 3. Генерируем отчет с учетом магазинов
-    report = generate_shift_report(open_shifts, users_data)
-
-    # 4. Сохраняем отчет в файл
-    save_shifts_report(report)
-
-    # 5. Выводим результаты в консоль
-    print_report(report)
-
-    # Запланировать следующее обновление
-    threading.Timer(UPDATE_INTERVAL, update_data).start()
+            print(f"{shop_name}: Смена НЕ ОТКРЫТА")
 
 
 def main():
-    # Первое обновление при запуске
-    update_data()
-
-    # Бесконечный цикл для поддержания работы программы
     while True:
-        time.sleep(1)
+        try:
+            poscards = fetch_poscards()
+            users = fetch_users()
+            t62 = fetch_today_transactions(62)
+            t64 = fetch_today_transactions(64)
+
+            report = generate_shift_report(t62, t64, users, poscards)
+            save_shift_report(report)
+            print_report(report)
+
+            print("\nЖдём 10 секунд до следующего обновления...\n")
+            time.sleep(10)
+        except Exception as e:
+            print(f"Ошибка во время обновления: {e}", file=sys.stderr)
+            time.sleep(10)
 
 
 if __name__ == "__main__":
-    print("Скрипт мониторинга смен запущен")
-    print(f"Обновление данных будет происходить каждые {UPDATE_INTERVAL // 60} минут")
-    try:
-        main()
-    except KeyboardInterrupt:
-        print("\nСкрипт остановлен пользователем")
+    main()

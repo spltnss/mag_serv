@@ -1,150 +1,25 @@
 [
   {
-    "name": "shop2",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "21",
-        "user_name": "Газимуллина ГФ"
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop42",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "422",
-        "user_name": "Жигалова А.Р."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop35",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "351",
-        "user_name": "Козлова Е.М."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop38",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "382",
-        "user_name": "Фаттахова Э.И."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop62",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "623",
-        "user_name": "Супина И.К."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
     "name": "shop1",
     "is_shift_open": true,
     "cashiers": [
       {
         "user_code": "104",
         "user_name": "Файзуллина Э.М."
-      },
-      {
-        "user_code": "102",
-        "user_name": "Павельева Т.С"
       }
     ],
-    "last_checked": "2025-05-23T10:31:44.645583"
+    "last_checked": "2025-05-23T21:07:14.286274"
   },
   {
-    "name": "shop45",
+    "name": "shop10",
     "is_shift_open": true,
     "cashiers": [
       {
-        "user_code": "451",
-        "user_name": "Бурмистрова А.В"
+        "user_code": "1004",
+        "user_name": "Абзалилова Т.А."
       }
     ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop8",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "83",
-        "user_name": "Аминова А.Ф"
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop51",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "514",
-        "user_name": "Перевалова З. Ш."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop16",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "161",
-        "user_name": "Лутфуллина Ю.М."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop5",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "51",
-        "user_name": "Шаяхметова Г.Г."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop39",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "391",
-        "user_name": "Котова Т.А."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop13",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "133",
-        "user_name": "Шибанкова О.В"
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
+    "last_checked": "2025-05-23T21:07:14.286274"
   },
   {
     "name": "shop100",
@@ -155,326 +30,7 @@
         "user_name": "Хайруллина Д.З."
       }
     ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop25",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "251",
-        "user_name": "Козина С. И."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop50",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "502",
-        "user_name": "Мартова А.А."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop12",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "122",
-        "user_name": "Высотина Н.Г."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop69",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "693",
-        "user_name": "Миронова И.Н."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop61",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "611",
-        "user_name": "Симонова Е.В."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop113",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "1113",
-        "user_name": "Асадова Н. В."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop28",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "284",
-        "user_name": "Гарифуллина А.А."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop123",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "12302",
-        "user_name": "Садыкова Г.Ф."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop120",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "12001",
-        "user_name": "Ловкова Е.А."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop63",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "634",
-        "user_name": "Корунас"
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop41",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "413",
-        "user_name": "Александрова М.В."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop114",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "11402",
-        "user_name": "Айбулатова Е. В."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop20",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "202",
-        "user_name": "Смирнова К.М."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop70",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "701",
-        "user_name": "Шеховцева Е.А."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop122",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "12201",
-        "user_name": "кассир1"
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop33",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "332",
-        "user_name": "Саубанова Э.Н."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop91",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "913",
-        "user_name": "Сафаргалина Л.Я."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop19",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "193",
-        "user_name": "Зиафутдинова Д.Н."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop17",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "171",
-        "user_name": "Перерва Л.В."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop22",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "221",
-        "user_name": " Буйлова О.П"
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop109",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "10903",
-        "user_name": "Камалова С.В."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop126",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "12605",
-        "user_name": "Гончарова Н.А."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop30",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "301",
-        "user_name": "Матюнина А.В"
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop36",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "366",
-        "user_name": "Кириллова О. А"
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop43",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "434",
-        "user_name": "Попова А.Н."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop77",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "774",
-        "user_name": "Меркулова А.Ф."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop32",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "322",
-        "user_name": "Белослудцева В.И."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop125",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "12502",
-        "user_name": "Габитова Л.А."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop116",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "11602",
-        "user_name": "Кузнецов В.П."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
+    "last_checked": "2025-05-23T21:07:14.286274"
   },
   {
     "name": "shop101",
@@ -485,18 +41,40 @@
         "user_name": "Балясникова З.Х"
       }
     ],
-    "last_checked": "2025-05-23T10:31:44.645583"
+    "last_checked": "2025-05-23T21:07:14.286274"
   },
   {
-    "name": "shop79",
+    "name": "shop102",
     "is_shift_open": true,
     "cashiers": [
       {
-        "user_code": "795",
-        "user_name": "Исламова Ю. А."
+        "user_code": "1022",
+        "user_name": "Ширшова О.Н."
       }
     ],
-    "last_checked": "2025-05-23T10:31:44.645583"
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop103",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "1031",
+        "user_name": "Михайлова Н.Н."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop104",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "10401",
+        "user_name": "Купрюшина А.О."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
   },
   {
     "name": "shop105",
@@ -507,216 +85,18 @@
         "user_name": "Волобуева И.Ф."
       }
     ],
-    "last_checked": "2025-05-23T10:31:44.645583"
+    "last_checked": "2025-05-23T21:07:14.286274"
   },
   {
-    "name": "shop115",
+    "name": "shop106",
     "is_shift_open": true,
     "cashiers": [
       {
-        "user_code": "11502",
-        "user_name": "Нургалиева Р.А."
+        "user_code": "10602",
+        "user_name": "Артемова К.В."
       }
     ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop53",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "531",
-        "user_name": "Решетникова О.Г."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop121",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "12101",
-        "user_name": "kassir"
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop80",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "802",
-        "user_name": "Андреева Е.А."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop52",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "523",
-        "user_name": "Иванова И.М."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop34",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "344",
-        "user_name": "Тугаева С.Р."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop96",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "961",
-        "user_name": "Дулясова А.П. "
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop44",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "442",
-        "user_name": "Саляхова Т.К."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop66",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "661",
-        "user_name": "Валиева А.А."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop27",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "272",
-        "user_name": "Камелина В.М."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop73",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "731",
-        "user_name": "Бурханов Р. Н."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop124",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "12403",
-        "user_name": "Чакина Л.А."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop60",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "601",
-        "user_name": "Муллаянова В.В"
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop29",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "294",
-        "user_name": "Федяева Е.С."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop11",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "112",
-        "user_name": "Тимофеева Н.Б."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop46",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "462",
-        "user_name": "Гимазетдинова Р.З."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop72",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "722",
-        "user_name": "Смирнова К. М."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop4",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "41",
-        "user_name": "Садыкова А. Р."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
-  },
-  {
-    "name": "shop58",
-    "is_shift_open": true,
-    "cashiers": [
-      {
-        "user_code": "582",
-        "user_name": "Калинина А.А."
-      }
-    ],
-    "last_checked": "2025-05-23T10:31:44.645583"
+    "last_checked": "2025-05-23T21:07:14.286274"
   },
   {
     "name": "shop107",
@@ -727,7 +107,724 @@
         "user_name": "Цветкова И"
       }
     ],
-    "last_checked": "2025-05-23T10:31:44.645583"
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop108",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "3",
+        "user_name": "Аппакова Р.Ф."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop109",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "10903",
+        "user_name": "Камалова С.В."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop11",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "112",
+        "user_name": "Тимофеева Н.Б."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop110",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "11001",
+        "user_name": "Ковалёвa Н.Г."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop111",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "11103",
+        "user_name": "Ибатуллина А.Р."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop112",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "11203",
+        "user_name": "кассир 3"
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop113",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "1113",
+        "user_name": "Асадова Н. В."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop114",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "11402",
+        "user_name": "Айбулатова Е. В."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop115",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "11502",
+        "user_name": "Нургалиева Р.А."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop116",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "11602",
+        "user_name": "Кузнецов В.П."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop117",
+    "is_shift_open": false,
+    "cashiers": [],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop118",
+    "is_shift_open": false,
+    "cashiers": [],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop119",
+    "is_shift_open": false,
+    "cashiers": [],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop12",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "122",
+        "user_name": "Высотина Н.Г."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop120",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "12001",
+        "user_name": "Ловкова Е.А."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop121",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "12101",
+        "user_name": "kassir"
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop122",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "12201",
+        "user_name": "кассир1"
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop123",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "12302",
+        "user_name": "Садыкова Г.Ф."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop124",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "12403",
+        "user_name": "Чакина Л.А."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop125",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "12502",
+        "user_name": "Габитова Л.А."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop126",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "12605",
+        "user_name": "Гончарова Н.А."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop13",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "133",
+        "user_name": "Шибанкова О.В"
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop14",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "142",
+        "user_name": "Аглиуллина Р.Х."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop15",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "154",
+        "user_name": "Стороженко Е.А."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop16",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "161",
+        "user_name": "Лутфуллина Ю.М."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop17",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "171",
+        "user_name": "Перерва Л.В."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop18",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "181",
+        "user_name": "Сагитова А.С."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop19",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "193",
+        "user_name": "Зиафутдинова Д.Н."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop1z",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "102",
+        "user_name": "Павельева Т.С"
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop2",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "21",
+        "user_name": "Газимуллина ГФ"
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop20",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "202",
+        "user_name": "Смирнова К.М."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop21",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "211",
+        "user_name": "Галушкина Е.В."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop22",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "221",
+        "user_name": " Буйлова О.П"
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop23",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "231",
+        "user_name": "Воронова Е.Г."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop24",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "243",
+        "user_name": "Кассир"
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop25",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "251",
+        "user_name": "Козина С. И."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop26",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "262",
+        "user_name": "Пожиткова О.В."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop27",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "272",
+        "user_name": "Камелина В.М."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop28",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "284",
+        "user_name": "Гарифуллина А.А."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop29",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "294",
+        "user_name": "Федяева Е.С."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop3",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "31",
+        "user_name": "Ибрагимова Р. Ш."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop30",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "301",
+        "user_name": "Матюнина А.В"
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop31",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "311",
+        "user_name": "Аллахвердиева А."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop32",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "322",
+        "user_name": "Белослудцева В.И."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop33",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "332",
+        "user_name": "Саубанова Э.Н."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop34",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "344",
+        "user_name": "Тугаева С.Р."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop35",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "351",
+        "user_name": "Козлова Е.М."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop36",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "366",
+        "user_name": "Кириллова О. А"
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop37",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "371",
+        "user_name": "Магданова Н.Н"
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop38",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "382",
+        "user_name": "Фаттахова Э.И."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop39",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "391",
+        "user_name": "Котова Т.А."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop4",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "41",
+        "user_name": "Садыкова А. Р."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop40",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "403",
+        "user_name": "Сайгафарова Р. Р."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop41",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "413",
+        "user_name": "Александрова М.В."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop42",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "422",
+        "user_name": "Жигалова А.Р."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop43",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "434",
+        "user_name": "Попова А.Н."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop44",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "442",
+        "user_name": "Саляхова Т.К."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop45",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "451",
+        "user_name": "Бурмистрова А.В"
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop46",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "462",
+        "user_name": "Гимазетдинова Р.З."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop47",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "471",
+        "user_name": "Мифтахетдинова Г.Ф."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop48",
+    "is_shift_open": false,
+    "cashiers": [],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop49",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "496",
+        "user_name": "Кожевникова В.А."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop5",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "51",
+        "user_name": "Шаяхметова Г.Г."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop50",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "502",
+        "user_name": "Мартова А.А."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop51",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "514",
+        "user_name": "Перевалова З. Ш."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop52",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "523",
+        "user_name": "Иванова И.М."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop53",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "531",
+        "user_name": "Решетникова О.Г."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
   },
   {
     "name": "shop54",
@@ -738,18 +835,29 @@
         "user_name": "Куружиа А. Г."
       }
     ],
-    "last_checked": "2025-05-23T10:31:44.645583"
+    "last_checked": "2025-05-23T21:07:14.286274"
   },
   {
-    "name": "shop85",
+    "name": "shop55",
     "is_shift_open": true,
     "cashiers": [
       {
-        "user_code": "853",
-        "user_name": "Кобзев В.В."
+        "user_code": "553",
+        "user_name": "Пахомова А.Н."
       }
     ],
-    "last_checked": "2025-05-23T10:31:44.645583"
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop56",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "554",
+        "user_name": "ШакироваЛ.Х."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
   },
   {
     "name": "shop57",
@@ -760,6 +868,497 @@
         "user_name": " Хайбуллина А.Р."
       }
     ],
-    "last_checked": "2025-05-23T10:31:44.645583"
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop58",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "582",
+        "user_name": "Калинина А.А."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop59",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "591",
+        "user_name": "Самойлова М. В."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop6",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "61",
+        "user_name": "Гуркина М.Р."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop60",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "601",
+        "user_name": "Муллаянова В.В"
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop61",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "611",
+        "user_name": "Симонова Е.В."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop62",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "623",
+        "user_name": "Супина И.К."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop63",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "634",
+        "user_name": "Корунас"
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop64",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "641",
+        "user_name": "Кутуева Ю.Р."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop65",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "651",
+        "user_name": "Шафикова С. Б."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop66",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "661",
+        "user_name": "Валиева А.А."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop67",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "671",
+        "user_name": "Бъядовская О.Н"
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop68",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "682",
+        "user_name": "Кутузова О.А."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop69",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "693",
+        "user_name": "Миронова И.Н."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop7",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "71",
+        "user_name": "Михальченко М.В."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop70",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "701",
+        "user_name": "Шеховцева Е.А."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop71",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "712",
+        "user_name": "Ильмендеева С"
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop72",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "722",
+        "user_name": "Смирнова К. М."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop73",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "731",
+        "user_name": "Бурханов Р. Н."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop74",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "740",
+        "user_name": "Абсаликова С.Р."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop75",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "754",
+        "user_name": "Максимову М.Е."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop76",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "761",
+        "user_name": "Кривохат В.Р."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop77",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "774",
+        "user_name": "Меркулова А.Ф."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop78",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "782",
+        "user_name": "Качмашева Д.Ф."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop79",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "795",
+        "user_name": "Исламова Ю. А."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop8",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "83",
+        "user_name": "Аминова А.Ф"
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop80",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "802",
+        "user_name": "Андреева Е.А."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop81",
+    "is_shift_open": false,
+    "cashiers": [],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop82",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "823",
+        "user_name": "Чернова Л Ш"
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop83",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "835",
+        "user_name": "Гусейнли А. А."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop84",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "845",
+        "user_name": "Самборская В. В."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop85",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "853",
+        "user_name": "Кобзев В.В."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop86",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "862",
+        "user_name": "Скопцова Н.А."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop87",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "871",
+        "user_name": "Мишустина И.О."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop88",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "882",
+        "user_name": "Шарипова Э.М."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop89",
+    "is_shift_open": false,
+    "cashiers": [],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop9",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "92",
+        "user_name": "Абдрахмановa А.А."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop90",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "901",
+        "user_name": "Аникина ДП"
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop91",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "913",
+        "user_name": "Сафаргалина Л.Я."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop92",
+    "is_shift_open": false,
+    "cashiers": [],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop93",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "931",
+        "user_name": "Бородина Е.Г."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop94",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "942",
+        "user_name": "Ангеловская А. Ф."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop95",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "951",
+        "user_name": "Лещинская Е.В."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop96",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "961",
+        "user_name": "Дулясова А.П. "
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop97",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "975",
+        "user_name": "Юнусбаева Н."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop98",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "983",
+        "user_name": "Евдокимова А.Ю."
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
+  },
+  {
+    "name": "shop99",
+    "is_shift_open": true,
+    "cashiers": [
+      {
+        "user_code": "992",
+        "user_name": "Бадалова В.Ф"
+      }
+    ],
+    "last_checked": "2025-05-23T21:07:14.286274"
   }
 ]

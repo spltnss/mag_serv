@@ -85,12 +85,14 @@ def update_shop_list():
             current_ip = old_ip  # Сохраняем старый IP, если пинг не удался
             vpn_status = old_vpn
 
-        updated_shops.append({
-            "name": shop_name,
-            "ip": current_ip,
-            "vpn": vpn_status,
-            "last_checked": datetime.now().isoformat(),  # Доп. поле для логов
-        })
+        updated_shops.append(
+            {
+                "name": shop_name,
+                "ip": current_ip,
+                "vpn": vpn_status,
+                "last_checked": datetime.now().isoformat(),  # Доп. поле для логов
+            }
+        )
 
     save_shops(updated_shops)
     print(f"✅ Данные обновлены: {datetime.now()}")

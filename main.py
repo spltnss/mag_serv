@@ -41,7 +41,7 @@ def load_store_ips():
             logging.error("JSON файл списка магазинов не найден!")
             return
 
-        with open(SHOP_LIST_PATH, 'r', encoding='utf-8') as file:
+        with open(SHOP_LIST_PATH, "r", encoding="utf-8") as file:
             shops_data = json.load(file)
             for shop in shops_data:
                 store = shop["name"]
@@ -49,15 +49,15 @@ def load_store_ips():
                 vpn_type = shop["vpn"]
 
                 # Сохраняем предыдущий статус
-                old_status = stores.get(store, {}).get('status', 'Unknown')
-                old_router = stores.get(store, {}).get('router', 'Unknown')
+                old_status = stores.get(store, {}).get("status", "Unknown")
+                old_router = stores.get(store, {}).get("router", "Unknown")
 
                 temp_stores[store] = {
-                    'ip': ip,
-                    'vpn': vpn_type,
-                    'status': old_status,
-                    'router': old_router,
-                    'last_updated': datetime.now().strftime('%H:%M:%S')
+                    "ip": ip,
+                    "vpn": vpn_type,
+                    "status": old_status,
+                    "router": old_router,
+                    "last_updated": datetime.now().strftime("%H:%M:%S"),
                 }
 
         stores.clear()
@@ -69,41 +69,45 @@ def load_store_ips():
 
 
 def ping(target):
-    param = '-n' if platform.system().lower() == 'windows' else '-c'
-    timeout = '-w' if platform.system().lower() == 'windows' else '-W'
-    timeout_value = '3000' if platform.system().lower() == 'windows' else '3'
+    param = "-n" if platform.system().lower() == "windows" else "-c"
+    timeout = "-w" if platform.system().lower() == "windows" else "-W"
+    timeout_value = "3000" if platform.system().lower() == "windows" else "3"
     try:
-        response = subprocess.run(['ping', param, '1', timeout, timeout_value, target],
-                                  capture_output=True,
-                                  text=True,
-                                  timeout=5)
-        return 'ttl=' in response.stdout.lower() or 'ответ от' in response.stdout.lower()
+        response = subprocess.run(
+            ["ping", param, "1", timeout, timeout_value, target],
+            capture_output=True,
+            text=True,
+            timeout=5,
+        )
+        return (
+            "ttl=" in response.stdout.lower() or "ответ от" in response.stdout.lower()
+        )
     except Exception as e:
-        logging.error(f'Ошибка пинга {target}: {e}')
+        logging.error(f"Ошибка пинга {target}: {e}")
         return False
 
 
 def check_store(store, data):
-    store_ip = data['ip']
-    vpn_type = data['vpn']
+    store_ip = data["ip"]
+    vpn_type = data["vpn"]
 
     if ping(store_ip):
-        stores[store]['status'] = 'Online'
-        stores[store]['router'] = 'Работает'
-        stores[store]['last_updated'] = datetime.now().strftime('%H:%M:%S')
+        stores[store]["status"] = "Online"
+        stores[store]["router"] = "Работает"
+        stores[store]["last_updated"] = datetime.now().strftime("%H:%M:%S")
         return
 
-    stores[store]['status'] = 'Offline'
-    stores[store]['last_updated'] = datetime.now().strftime('%H:%M:%S')
+    stores[store]["status"] = "Offline"
+    stores[store]["last_updated"] = datetime.now().strftime("%H:%M:%S")
 
-    if vpn_type == 'Новая VPN':
+    if vpn_type == "Новая VPN":
         router_ip = f"{'.'.join(store_ip.split('.')[:3])}.254"
         if ping(router_ip):
-            stores[store]['router'] = 'Касса не в сети'
+            stores[store]["router"] = "Касса не в сети"
         else:
-            stores[store]['router'] = 'Роутер не в сети'
+            stores[store]["router"] = "Роутер не в сети"
     else:
-        stores[store]['router'] = 'Требуется проверка'
+        stores[store]["router"] = "Требуется проверка"
 
 
 def load_shift_statuses():
@@ -113,29 +117,14 @@ def load_shift_statuses():
             logging.error("JSON файл статусов смен не найден!")
             return
 
-        with open(SHIFT_STATUS_PATH, 'r', encoding='utf-8') as file:
+        with open(SHIFT_STATUS_PATH, "r", encoding="utf-8") as file:
             shift_data = json.load(file)
             shift_statuses = {shop["name"]: shop for shop in shift_data}
-
-            # Специальная обработка для shop1 и shop1z
-            if 'shop1' in shift_statuses and 'shop1z' not in shift_statuses:
-                shift_statuses['shop1z'] = {
-                    'name': 'shop1z',
-                    'is_shift_open': shift_statuses['shop1']['is_shift_open'],
-                    'cashiers': [],
-                    'last_checked': shift_statuses['shop1']['last_checked']
-                }
-            elif 'shop1z' in shift_statuses and 'shop1' not in shift_statuses:
-                shift_statuses['shop1'] = {
-                    'name': 'shop1',
-                    'is_shift_open': shift_statuses['shop1z']['is_shift_open'],
-                    'cashiers': [],
-                    'last_checked': shift_statuses['shop1z']['last_checked']
-                }
 
         logging.info("Статусы смен обновлены из JSON.")
     except Exception as e:
         logging.error(f"Ошибка при загрузке JSON файла статусов смен: {e}")
+
 
 def ping_stores():
     with ThreadPoolExecutor(max_workers=20) as executor:
@@ -144,9 +133,9 @@ def ping_stores():
 
 # Настройка планировщика
 scheduler = BackgroundScheduler()
-scheduler.add_job(ping_stores, 'interval', seconds=10)
-scheduler.add_job(load_store_ips, 'interval', minutes=30)
-scheduler.add_job(load_shift_statuses, 'interval', minutes=5)
+scheduler.add_job(ping_stores, "interval", seconds=10)
+scheduler.add_job(load_store_ips, "interval", minutes=30)
+scheduler.add_job(load_shift_statuses, "interval", seconds=10)
 scheduler.start()
 
 # Загрузка данных перед стартом
@@ -154,7 +143,7 @@ load_store_ips()
 load_shift_statuses()  # Добавляем загрузку статусов смен
 
 # Modern UI Template with Dark Mode
-html_template = '''
+html_template = """
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -249,11 +238,15 @@ html_template = '''
         }
 
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+html, body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
 
         body {
             font-family: 'Roboto', sans-serif;
@@ -636,12 +629,20 @@ div[style*="overflow-y: auto"] {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    transition: all 0.2s ease;
     margin-top: 10px;
+    transition:
+        background-color 0.4s ease,
+        color 0.4s ease,
+        transform 0.2s ease;
+    transform: scale(1);
 }
 
 .reset-btn:hover {
     background-color: var(--primary-light);
+}
+
+.reset-btn:active {
+    transform: scale(0.97); /* эффект нажатия */
 }
 
 .reset-btn i {
@@ -651,7 +652,7 @@ div[style*="overflow-y: auto"] {
 
 .reset-btn.active {
     background-color: var(--danger);
-    animation: pulse-red 0.75s; /* Уменьшенное время */
+    animation: pulse-red 0.75s;
 }
 
 .reset-btn.active i {
@@ -782,21 +783,17 @@ div[style*="overflow-y: auto"] {
             </div>
         </td>
         <td>
-    <div class="shift-status">
-        {% if shift_statuses.get(store, {}).get('is_shift_open', False) %}
-            <i class="fas fa-door-open" style="color: #4cc9f0;"></i>
-            {% if store in ['shop1', 'shop1z'] %}
-                Смена открыта
-            {% else %}
-                {% for cashier in shift_statuses[store]['cashiers'] %}
-                    {{ cashier['user_name'] }}<br>
-                {% endfor %}
-            {% endif %}
-        {% else %}
-            <i class="fas fa-door-closed" style="color: #f94144;"></i> Закрыта
-        {% endif %}
-    </div>
-</td>
+            <div class="shift-status">
+                {% if shift_statuses.get(store, {}).get('is_shift_open', False) %}
+                    <i class="fas fa-door-open" style="color: #4cc9f0;"></i>
+                    {% for cashier in shift_statuses[store]['cashiers'] %}
+                        {{ cashier['user_name'] }}<br>
+                    {% endfor %}
+                {% else %}
+                    <i class="fas fa-door-closed" style="color: #f94144;"></i> Закрыта
+                {% endif %}
+            </div>
+        </td>
         <td class="last-updated">{{ data.last_updated }}</td>
     </tr>
     {% endfor %}
@@ -848,22 +845,15 @@ div[style*="overflow-y: auto"] {
                 }
                 routerCell.html(icon + info.router);
 
-                // ОБНОВЛЕННЫЙ БЛОК: Статус смены
+                // Обновляем статус смены
                 const shiftCell = row.find('td:nth-child(4) .shift-status');
                 if (info.shift && info.shift.is_shift_open) {
-                    if (store === 'shop1' || store === 'shop1z') {
-                        // Специальный текст для shop1 и shop1z
-                        shiftCell.html('<i class="fas fa-door-open" style="color: #4cc9f0;"></i> Смена открыта');
-                    } else {
-                        // Стандартное отображение для остальных магазинов
-                        let cashiers = '';
-                        if (info.shift.cashiers && info.shift.cashiers.length > 0) {
-                            cashiers = info.shift.cashiers.map(c => c.user_name).join('<br>');
-                        }
-                        shiftCell.html('<i class="fas fa-door-open" style="color: #4cc9f0;"></i> ' + cashiers);
+                    let cashiers = '';
+                    if (info.shift.cashiers && info.shift.cashiers.length > 0) {
+                        cashiers = info.shift.cashiers.map(c => c.user_name).join('<br>');
                     }
+                    shiftCell.html('<i class="fas fa-door-open" style="color: #4cc9f0;"></i> ' + cashiers);
                 } else {
-                    // Закрытая смена для всех магазинов
                     shiftCell.html('<i class="fas fa-door-closed" style="color: #f94144;"></i> Закрыта');
                 }
 
@@ -920,7 +910,7 @@ function applyFilters() {
         const row = $(this);
         const rowStatus = row.hasClass('online') ? 'online' : 'offline';
         const rowVpn = row.data('vpn') === 'Новая VPN' ? 'new' : 'old';
-        
+
         // Проверяем статус смены
         const shiftText = row.find('td:nth-child(4) .shift-status').text().toLowerCase();
         const rowShift = shiftText.includes('закрыта') ? 'closed' : 'open';
@@ -943,31 +933,31 @@ function applyFilters() {
 $('#reset-filters').click(function() {
     const btn = $(this);
     const icon = btn.find('i');
-    
+
     // Убираем стандартную пульсацию
     btn.removeClass('pulse');
-    
+
     // Добавляем активное состояние с pulse-red
     btn.addClass('active pulse-red');
-    
+
     // Сбрасываем значения фильтров
     $('#status-filter').val('all');
     $('#vpn-filter').val('all');
     $('#shift-filter').val('all');
     $('#search-store').val('');
-    
+
     // Применяем фильтры
     applyFilters();
-    
+
     // Возвращаем стандартный стиль через 0.75 секунды
     setTimeout(() => {
         btn.removeClass('active pulse-red');
-        
+
         // Возвращаем стандартную пульсацию после небольшой задержки
         setTimeout(() => {
             btn.addClass('pulse');
         }, 200);
-        
+
     }, 750); // Уменьшенное время в 2 раза
 });
 
@@ -989,48 +979,36 @@ $('#search-store').keyup(function() {
     </script>
 </body>
 </html>
-'''
+"""
 
 
-@app.route('/')
+@app.route("/")
 def index():
-    online_count = sum(1 for data in stores.values() if data.get('status') == 'Online')
+    online_count = sum(1 for data in stores.values() if data.get("status") == "Online")
     offline_count = len(stores) - online_count
 
-    return render_template_string(html_template,
-                                stores=stores,
-                                online_count=online_count,
-                                offline_count=offline_count,
-                                shift_statuses=shift_statuses)  # Добавляем передачу статусов смен
+    return render_template_string(
+        html_template,
+        stores=stores,
+        online_count=online_count,
+        offline_count=offline_count,
+        shift_statuses=shift_statuses,
+    )  # Добавляем передачу статусов смен
 
 
-@app.route('/status')
+@app.route("/status")
 def status():
-    result = {}
-    for store, data in stores.items():
-        shift_data = shift_statuses.get(store, {'is_shift_open': False})
-
-        # Специальная обработка для shop1 и shop1z
-        if store in ['shop1', 'shop1z']:
-            result[store] = {
+    return jsonify(
+        {
+            store: {
                 **data,
-                'vpn': data['vpn'],
-                'shift': {
-                    'is_shift_open': shift_data['is_shift_open'],
-                    'display_text': 'Смена открыта' if shift_data['is_shift_open'] else 'Закрыта'
-                }
+                "vpn": data["vpn"],
+                "shift": shift_statuses.get(store, {"is_shift_open": False}),
             }
-        else:
-            result[store] = {
-                **data,
-                'vpn': data['vpn'],
-                'shift': {
-                    'is_shift_open': shift_data['is_shift_open'],
-                    'cashiers': shift_data.get('cashiers', [])
-                }
-            }
-    return jsonify(result)
+            for store, data in stores.items()
+        }
+    )
 
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=80)
