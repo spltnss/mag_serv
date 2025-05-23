@@ -2,8 +2,8 @@ import subprocess
 import threading
 
 def stream_output(process, name):
-    for line in iter(process.stdout.readline, b''):
-        print(f"[{name}] {line.decode().rstrip()}")
+    for line in process.stdout:
+        print(f"[{name}] {line.rstrip()}")
 
 processes = []
 scripts = [
@@ -17,7 +17,8 @@ for script, name in scripts:
         ["python", script],
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
-        bufsize=1
+        bufsize=1,
+        text=True  # Включаем текстовый режим, чтобы построчная буферизация работала
     )
     t = threading.Thread(target=stream_output, args=(p, name))
     t.start()
