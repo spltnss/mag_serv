@@ -6,9 +6,6 @@ RUN apt-get update --allow-unauthenticated && apt-get install -y iputils-ping --
 
 COPY . .
 
-RUN apt-get update && apt-get install -y supervisor \
-    && pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+CMD ["python", "start.py"]
