@@ -8,7 +8,7 @@ def stream_output(process, name):
 
 
 processes = []
-scripts = [("main.py", "МОРДА"), ("ping.py", "PING"), ("shift_watcher.py", "СМЕНЫ")]
+scripts = [("main.py", "МОРДА"), ("ping.py", "PING")]
 
 for script, name in scripts:
     p = subprocess.Popen(
