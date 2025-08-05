@@ -862,14 +862,13 @@ div[style*="overflow-y: auto"] {
 });
 
         // Поиск и фильтрация
-        $('#status-filter, #vpn-filter, #shift-filter').change(function() {
+        $('#status-filter, #vpn-filter').change(function() {
     applyFilters();
 });
 
 function applyFilters() {
     const status = $('#status-filter').val();
     const vpn = $('#vpn-filter').val();
-    const shift = $('#shift-filter').val();
     const search = $('#search-store').val().toLowerCase();
 
     $('#stores-table tr').each(function() {
@@ -877,17 +876,12 @@ function applyFilters() {
         const rowStatus = row.hasClass('online') ? 'online' : 'offline';
         const rowVpn = row.data('vpn') === 'Новая VPN' ? 'new' : 'old';
 
-        // Проверяем статус смены
-        const shiftText = row.find('td:nth-child(4) .shift-status').text().toLowerCase();
-        const rowShift = shiftText.includes('закрыта') ? 'closed' : 'open';
-
         const statusMatch = status === 'all' || rowStatus === status;
         const vpnMatch = vpn === 'all' || rowVpn === vpn;
-        const shiftMatch = shift === 'all' || rowShift === shift;
         const searchMatch = search === '' || row.attr('id').substring(4).includes(search);
 
         // Плавное появление/исчезновение строк
-        if (statusMatch && vpnMatch && shiftMatch && searchMatch) {
+        if (statusMatch && vpnMatch && searchMatch) {
             row.stop(true, true).fadeIn(200);
         } else {
             row.stop(true, true).fadeOut(200);
