@@ -717,15 +717,6 @@ div[style*="overflow-y: auto"] {
     </div>
 
     <div class="filter-group">
-        <label for="shift-filter">Смена</label>
-        <select id="shift-filter">
-            <option value="all">Все</option>
-            <option value="open">Открыта</option>
-            <option value="closed">Закрыта</option>
-        </select>
-    </div>
-
-    <div class="filter-group">
         <label for="search-store">Поиск магазина</label>
         <input type="text" id="search-store" placeholder="Номер магазина...">
     </div>
