@@ -745,7 +745,6 @@ div[style*="overflow-y: auto"] {
             <th>Магазин</th>
             <th>Статус</th>
             <th>Роутер</th>
-            <th>Смена</th>  <!-- Новый столбец -->
             <th>Обновлено</th>
         </tr>
     </thead>
@@ -780,18 +779,6 @@ div[style*="overflow-y: auto"] {
                     <i class="fas fa-times-circle"></i>
                 {% endif %}
                 {{ data.router }}
-            </div>
-        </td>
-        <td>
-            <div class="shift-status">
-                {% if shift_statuses.get(store, {}).get('is_shift_open', False) %}
-                    <i class="fas fa-door-open" style="color: #4cc9f0;"></i>
-                    {% for cashier in shift_statuses[store]['cashiers'] %}
-                        {{ cashier['user_name'] }}<br>
-                    {% endfor %}
-                {% else %}
-                    <i class="fas fa-door-closed" style="color: #f94144;"></i> Закрыта
-                {% endif %}
             </div>
         </td>
         <td class="last-updated">{{ data.last_updated }}</td>
@@ -844,18 +831,6 @@ div[style*="overflow-y: auto"] {
                     icon = '<i class="fas fa-times-circle"></i>';
                 }
                 routerCell.html(icon + info.router);
-
-                // Обновляем статус смены
-                const shiftCell = row.find('td:nth-child(4) .shift-status');
-                if (info.shift && info.shift.is_shift_open) {
-                    let cashiers = '';
-                    if (info.shift.cashiers && info.shift.cashiers.length > 0) {
-                        cashiers = info.shift.cashiers.map(c => c.user_name).join('<br>');
-                    }
-                    shiftCell.html('<i class="fas fa-door-open" style="color: #4cc9f0;"></i> ' + cashiers);
-                } else {
-                    shiftCell.html('<i class="fas fa-door-closed" style="color: #f94144;"></i> Закрыта');
-                }
 
                 // Обновляем время
                 row.find('td:nth-child(5)').text(info.last_updated);
